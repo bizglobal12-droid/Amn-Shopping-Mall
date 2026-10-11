@@ -5,10 +5,66 @@ const segments = [
     "Segment 3: Dairy, Beverages & Snacks",
     "Segment 4: Household & Personal Care"
 ];
+// --- CATEGORY-SPECIFIC LUXURY PHOTO POOLS ---
+const categoryImagePools = {
+    "Segment 1: Fresh Produce & Fruits": [
+        "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1518843875459-f738682238a6?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=500&auto=format&fit=crop&q=80"
+    ],
+    "Segment 2: Pantry Staples & Grains": [
+        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1546554137-f86b9593a222?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop&q=80"
+    ],
+    "Segment 3: Dairy, Beverages & Snacks": [
+        "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500&auto=format&fit=crop&q=80"
+    ],
+    "Segment 4: Household & Personal Care": [
+        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=500&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=500&auto=format&fit=crop&q=80"
+    ]
+};
 
+function getFallbackImage(name) {
+    return `https://placehold.co/400x300/1e1e1e/D4AF37?text=${encodeURIComponent(name)}`;
+}
 
+function generateProducts() {
+    allProducts = [];
+    let idCounter = 1;
+    segments.forEach(segment => {
+        const items = segmentItemTemplates[segment];
+        const pool = categoryImagePools[segment];
+        items.forEach((itemName, index) => {
+            const basePrice = Math.floor(Math.random() * 26500) + 1500;
+            const imgUrl = pool[index % pool.length];
             
             allProducts.push({
+                id: idCounter++,
+                name: itemName,
+                category: segment,
+                price: basePrice,
+                image: imgUrl,
+                fallbackImage: getFallbackImage(itemName),
+                description: `High-grade ${itemName.toLowerCase()} sourced directly under strict quality controls for AMN Shopping Mall customers.`
+            });
+        });
+    });
+}
+
+     
+         allProducts.push({
                 id: idCounter++,
                 name: itemName,
                 category: segment,
