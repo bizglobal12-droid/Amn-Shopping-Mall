@@ -1,4 +1,4 @@
-// AMN SHOPPING MALL - Clean Production Script
+// AMN SHOPPING MALL - Segment-Matched Luxury Script
 const segments = [
     "Segment 1: Fresh Produce & Fruits",
     "Segment 2: Pantry Staples & Grains",
@@ -6,18 +6,39 @@ const segments = [
     "Segment 4: Household & Personal Care"
 ];
 
-const foodImages = [
-    "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=500&q=80",
-    "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&q=80",
-    "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&q=80",
-    "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80",
-    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80",
-    "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80",
-    "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80",
-    "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80"
-];
+// Dedicated category-specific image pools
+const segmentImages = {
+    "Segment 1: Fresh Produce & Fruits": [
+        "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=500&q=80",
+        "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&q=80",
+        "https://images.unsplash.com/photo-1518843875459-f738682238a6?w=500&q=80",
+        "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=500&q=80",
+        "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=500&q=80"
+    ],
+    "Segment 2: Pantry Staples & Grains": [
+        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&q=80", // Rice/Grains
+        "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", // Flour/Bread
+        "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=500&q=80", // Spices
+        "https://images.unsplash.com/photo-1546554137-f86b9593a222?w=500&q=80", // Beans/Grains
+        "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&q=80"  // Oils
+    ],
+    "Segment 3: Dairy, Beverages & Snacks": [
+        "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&q=80", // Dairy/Milk
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80", // Beverages
+        "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500&q=80", // Snacks/Cookies
+        "https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=500&q=80", // Chocolates
+        "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500&q=80"  // Coffee/Tea
+    ],
+    "Segment 4: Household & Personal Care": [
+        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80", // Cleaners
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&q=80", // Soaps/Care
+        "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=500&q=80", // Disinfectants
+        "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=500&q=80"  // Personal Care
+    ]
+};
 
 const itemNames = [
+    // Segment 1 (50 items)
     "Organic Red Apples", "Fresh Cavendish Bananas", "Ripe Hass Avocados", "Crisp Garden Lettuce", "Juicy Valencia Oranges",
     "Vine-Ripened Tomatoes", "Fresh Organic Carrots", "Sweet Bell Peppers", "Fresh Broccoli Crowns", "Baby Spinach Leaves",
     "Golden Pineapples", "Fresh Green Cabbage", "Organic Red Onions", "Fresh Garlic Bulbs", "Zucchini Squash",
@@ -28,6 +49,8 @@ const itemNames = [
     "Fresh Kiwi", "Fresh Pomegranate", "Fresh Grapefruit", "Fresh Cantaloupe", "Fresh Honeydew Melon",
     "Fresh Eggplant", "Fresh Okra", "Fresh Beetroot", "Fresh Radishes", "Fresh Turnips",
     "Fresh Sweet Potatoes", "Fresh White Yams", "Fresh Taro Root", "Fresh Plantains", "Fresh Spring Onions",
+    
+    // Segment 2 (50 items)
     "Premium Basmati Rice", "Long Grain Parboiled Rice", "Local Brown Rice", "Jasmine Fragrant Rice", "Whole Wheat Flour",
     "All-Purpose Baking Flour", "Semolina Grain Flour", "Garri White Fine", "Yellow Cassava Garri", "Pounded Yam Flour",
     "Rolled Oats Breakfast", "Instant Oat Cereal", "Macaroni Pasta", "Spaghetti Pasta", "Fusilli Spiral Pasta",
@@ -38,6 +61,8 @@ const itemNames = [
     "Beef Stock Cubes", "Brown Lentils", "Red Kidney Beans", "Black-Eyed Peas", "Pigeon Peas",
     "Chickpeas Garbanzo", "Soybeans Grain", "White Garri Flakes", "Corn Meal Polenta", "Wheat Bran Cereal",
     "Honey Natural Pure", "Apple Cider Vinegar", "White Distilled Vinegar", "Baking Soda", "Baking Powder",
+    
+    // Segment 3 (50 items)
     "Full Cream Milk Powder", "Evaporated Milk Tin", "Fresh Whole Milk Liquid", "Unsalted Butter Block", "Cheddar Cheese Block",
     "Mozzarella Cheese Shredded", "Greek Yogurt Plain", "Strawberry Flavored Yogurt", "Vanilla Ice Cream Tub", "Fresh Chicken Eggs Crate",
     "Instant Coffee Granules", "Roasted Coffee Beans", "Ceylon Black Tea Bags", "Green Tea Bags", "Cocoa Chocolate Drink Mix",
@@ -48,6 +73,8 @@ const itemNames = [
     "Sponge Cake Slice", "Cream Crackers Biscuits", "Ginger Biscuit Snaps", "Granola Energy Bar", "Corn Flakes Cereal Box",
     "Choco Pops Cereal", "Muesli Fruit Mix", "Condensed Milk Tin", "Whipped Dairy Cream", "Cream Cheese Spread",
     "Parmesan Cheese Grated", "Iced Tea Lemon", "Herbal Chamomile Tea", "Energy Boost Drink", "Smoothie Fruit Blend",
+    
+    // Segment 4 (50 items)
     "Multi-Purpose Liquid Soap", "Dishwashing Washing Liquid", "Laundry Washing Powder", "Fabric Softener Liquid", "Bathroom Bleach Disinfectant",
     "Floor Cleaner Liquid", "Toilet Bowl Cleaner", "Glass Window Cleaner", "Antibacterial Hand Wash", "Bath Soap Bar Luxury",
     "Herbal Shampoo Bottle", "Conditioner Hair Care", "Body Lotion Moisturizer", "Vaseline Petroleum Jelly", "Deodorant Body Spray",
@@ -71,11 +98,14 @@ const itemsPerPage = 24;
 function initStore() {
     allProducts = [];
     for (let i = 0; i < 200; i++) {
-        const name = itemNames[i % itemNames.length];
+        const name = itemNames[i];
         const segIndex = Math.floor(i / 50);
         const segment = segments[segIndex];
         const price = Math.floor(Math.random() * 25000) + 1500;
-        const image = foodImages[i % foodImages.length];
+        
+        // Pick image strictly matching the segment pool
+        const pool = segmentImages[segment];
+        const image = pool[i % pool.length];
 
         allProducts.push({
             id: i + 1,
@@ -152,7 +182,6 @@ function renderProducts() {
         '</div>';
     }
     grid.innerHTML = html;
-
     renderPagination(totalPages);
 }
 
