@@ -61,3 +61,41 @@
             </div>
         </div>
     </header>
+    <!-- Hero Banner Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-badge">EXECUTIVE GROCERY COLLECTION</span>
+            <h1>Curated Luxury & Essentials</h1>
+            <p>Explore our inventory of 200 premium items meticulously categorized into 4 high-grade segments for your absolute convenience.</p>
+            <div class="hero-stats">
+                <div><strong>200+</strong> Groceries</div>
+                <div><strong>4</strong> Segments</div>
+                <div><strong>100%</strong> Quality Guaranteed</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Store Catalog Section -->
+    <main class="store-container" id="store">
+        <div class="catalog-header">
+            <h2 id="currentCategoryTitle">All Products (200 Items)</h2>
+            <div class="catalog-filters">
+                <select id="sortSelect" onchange="sortProducts()">
+                    <option value="default">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Alphabetical (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid rendered via JavaScript -->
+        <div class="product-grid" id="productGrid">
+            <!-- Products injected dynamically -->
+        </div>
+
+        <!-- Pagination / Load More Controls -->
+        <div class="pagination-container" id="paginationContainer">
+            <!-- Dynamic pagination buttons -->
+        </div>
+    </main>
