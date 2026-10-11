@@ -247,4 +247,153 @@
     </footer>
 </body>
 </html>
+    <!-- About Section -->
+    <section class="info-section about-section" id="about">
+        <div class="info-box">
+            <h2><i class="fa-solid fa-gem"></i> About AMN Shopping Mall</h2>
+            <p>AMN Shopping Mall stands as the benchmark for luxury grocery retail and domestic convenience. Established with a commitment to uncompromised excellence, we source only the finest fresh produce, premium pantry staples, exquisite dairy, and elite household provisions.</p>
+            <p>Our digital infrastructure ensures a seamless, high-speed ordering experience equipped with smart voice search, image recognition scanning, and lightning-fast home dispatch services.</p>
+        </div>
+    </section>
+
+    <!-- Support / Complain Section -->
+    <section class="info-section contact-section" id="contact">
+        <div class="info-box">
+            <h2><i class="fa-solid fa-headset"></i> Support & Complain Desk</h2>
+            <p>Have an inquiry, feedback, or a complaint regarding your service or order? Fill out the form below, and our executive support team will attend to you immediately.</p>
+            
+            <form class="support-form" onsubmit="submitSupportForm(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Full Name</label>
+                        <input type="text" id="supportName" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email or Phone</label>
+                        <input type="text" id="supportContact" required placeholder="Email address or phone number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Inquiry Type</label>
+                    <select id="supportType">
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Order Complaint">Order Complaint / Issue</option>
+                        <option value="Product Request">Product Request</option>
+                        <option value="Feedback">Feedback / Compliment</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message / Details</label>
+                    <textarea id="supportMessage" rows="4" required placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="luxury-btn">Submit Message <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Cart Slide-Over Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Your Shopping Bag</h3>
+            <button class="close-btn" onclick="toggleCartDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <!-- Cart items populated here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <strong id="cartSubtotal">₦0.00</strong>
+            </div>
+            <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartDrawer()"></div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-backdrop" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body" id="modalProductDetails">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout & Order Placement Modal -->
+    <div class="modal-backdrop" id="checkoutModal">
+        <div class="modal-content checkout-modal-content">
+            <button class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2><i class="fa-solid fa-truck-fast"></i> Complete Your Order</h2>
+            <p>Please provide your delivery information below to finalize your purchase with AMN Shopping Mall.</p>
+            
+            <form class="checkout-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Full Name</label>
+                    <input type="text" id="orderFullName" required placeholder="e.g. Ibrahim Al-Amin">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-location-dot"></i> Delivery Address</label>
+                    <textarea id="orderAddress" rows="3" required placeholder="Street address, apartment, city, state"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="orderPhone" required placeholder="e.g. +234 800 000 0000">
+                </div>
+                <div class="order-summary-box" id="checkoutSummaryBox">
+                    <!-- Populated via JS -->
+                </div>
+                <button type="submit" class="luxury-btn submit-order-btn">Place Order Now <i class="fa-solid fa-check-circle"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Image Scanner Modal -->
+    <div class="modal-backdrop" id="scannerModal">
+        <div class="modal-content scanner-modal-content">
+            <button class="modal-close" onclick="closeScannerModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2><i class="fa-solid fa-camera-retro"></i> Visual Product Scanner</h2>
+            <p>Upload a photo or sample image of a grocery item to instantly scan and match it with our 200-item inventory.</p>
+            
+            <div class="scanner-dropzone" onclick="document.getElementById('scanFileInput').click()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Click to upload image or drag & drop</span>
+                <input type="file" id="scanFileInput" accept="image/*" style="display:none" onchange="handleImageScan(event)">
+            </div>
+            <div id="scanResultContainer"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="luxury-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>AMN SHOPPING MALL</h3>
+                <p>The epitome of high-end grocery retailing. Delivering absolute quality, freshness, and satisfaction.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Segments</h4>
+                <ul>
+                    <li><a href="#" onclick="filterCategory('Segment 1: Fresh Produce & Fruits', event)">Fresh Produce & Fruits</a></li>
+                    <li><a href="#" onclick="filterCategory('Segment 2: Pantry Staples & Grains', event)">Pantry Staples & Grains</a></li>
+                    <li><a href="#" onclick="filterCategory('Segment 3: Dairy, Beverages & Snacks', event)">Dairy, Beverages & Snacks</a></li>
+                    <li><a href="#" onclick="filterCategory('Segment 4: Household & Personal Care', event)">Household & Personal Care</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#contact">Complain Box</a></li>
+                    <li><a href="#about">About Our Mall</a></li>
+                    <li><a href="#contact">Dispatch & Delivery</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AMN SHOPPING MALL. All Rights Reserved. Crafted with Luxury UX.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
 
