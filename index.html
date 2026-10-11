@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMN SHOPPING MALL | Luxury Groceries</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Luxury Announcement Banner -->
+    <div class="top-announcement">
+        <span><i class="fa-solid fa-crown"></i> Welcome to AMN Shopping Mall — Premium Quality Delivered to Your Doorstep</span>
+        <div class="top-links">
+            <a href="#about"><i class="fa-solid fa-circle-info"></i> About Us</a>
+            <a href="#contact"><i class="fa-solid fa-headset"></i> Support / Complain</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="luxury-navbar" id="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <i class="fa-solid fa-gem"></i>
+                <a href="#" class="brand-title">AMN SHOPPING MALL</a>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" class="nav-link active" onclick="filterCategory('all', event)"><i class="fa-solid fa-store"></i> Store</a>
+                
+                <!-- Categories Dropdown -->
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fa-solid fa-list-ul"></i> Segments <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="filterCategory('Segment 1: Fresh Produce & Fruits', event)">Segment 1: Fresh Produce & Fruits (50)</a>
+                        <a href="#" onclick="filterCategory('Segment 2: Pantry Staples & Grains', event)">Segment 2: Pantry Staples & Grains (50)</a>
+                        <a href="#" onclick="filterCategory('Segment 3: Dairy, Beverages & Snacks', event)">Segment 3: Dairy, Beverages & Snacks (50)</a>
+                        <a href="#" onclick="filterCategory('Segment 4: Household & Personal Care', event)">Segment 4: Household & Personal Care (50)</a>
+                    </div>
+                </div>
+
+                <a href="#about" class="nav-link"><i class="fa-solid fa-building"></i> About</a>
+                <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a>
+            </div>
+
+            <!-- Global Search & Actions -->
+            <div class="nav-actions">
+                <div class="search-bar-wrapper">
+                    <input type="text" id="searchInput" placeholder="Search 200+ groceries..." oninput="handleSearch()">
+                    <button class="search-icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="tool-btn mic-btn" onclick="startVoiceSearch()" title="Voice Search"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="tool-btn scan-btn" onclick="openScannerModal()" title="Scan Image"><i class="fa-solid fa-camera"></i></button>
+                </div>
+
+                <button class="cart-btn" onclick="toggleCartDrawer()">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
